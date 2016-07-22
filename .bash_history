@@ -141,3 +141,94 @@ cd myvirtualenv/
 pip isntall json
 pip install json
 pip install flask_app
+ls
+cd mysite/
+ls
+python flask_app.py
+pip install MySQLdb
+pip3.3 install --user https://github.com/davispuh/MySQL-for-Python-3/archive/1.0.tar.gz
+ls
+python gcm.py 
+pip install pushjack
+python gcm.py 
+pip install urllib2
+python gcm.py
+deactivate
+pip install --user pwhich
+ls
+source ../.virtualenvs/myvirtualenv/bin/activate
+pip install pwhich
+pip install urllib3[secure] pyopenssl ndg-httpsclient pyasn1
+pip install urllib2
+python gcm.py 
+python flask_app.py 
+pip install json
+import json
+pyton import json
+import MySQLdb
+pip install mysql-python
+which pip
+which python
+python
+pip install mysqlclient
+python flask_app.py 
+pip install urllib2
+clear
+python
+pip install gcm
+python gcm.py
+python
+pip install pushjack
+python gcm.py 
+python
+pip install email
+python
+python mail.py
+python
+python mail.py
+python gcm_test.py
+python test.py
+python mail.py
+python test.py
+python mail.py
+python test.py
+clear
+cd..
+cd ..
+echo "# ReportCoverServer" >> READEME.md
+git init
+git add README.md
+git commit -m "first commit"
+git config --global user.email "yjsgoon@gmail.com"
+git config --global user.name "JiSoo Yoon"
+git add README.md
+git commit -m "first commit"
+git add .
+git commit -am "first commit"
+git status
+git remote add origin https://github.com/yjsgoon@ReportCoverServer.git
+git push -u origin master
+git remote add origin https://github.com/yjsgoon/ReportCoverServer.git
+git push -u origin master
+git remote add origin https://github.com/yjsgoon/ReportCoverServer.git
+git push -u origin master
+git status
+git remote add origin https://github.com/yjsgoon/ReportCoverServer.git
+git push -u origin master
+git remote add origin git@github.com:yjsgoon/ReportCoverServer.git
+git push -u origin master
+git init
+git status
+rm -rf .git
+323
+echo "# ReportCoverServer" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git remote set-url origin https://github.com/yjsgoon/ReportCoverServer.git
+git remote add origin https://github.com/yjsgoon/ReportCoverServer.git
+git push -u origin master
+git log
+ls
+rm -rf READEME.md
+ls

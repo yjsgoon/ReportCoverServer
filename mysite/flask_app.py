@@ -24,32 +24,40 @@ cursor = conn.cursor()
 def hello_world():
     return 'Hello from ReportCover!'
 
-@app.route('/loadUniv', methods = ['GET'])
+@app.route('/account', methods = ['POST', 'PUT'])
+def account():
+    if request.method == 'POST':
+        email = request.form['email']
+
+        query = "insert into account (Email) values ('" + email + "');"
+
+        cursor.execute(query)
+        conn.commit()
+
+    if request.method == 'PUT':
+        email = request.form['email']
+        insDate = request.form['insDate']
+        lastDate = request.form['lastDate']
+        disDate = request.form['disDate']
+
+        query = "update account set InstalledDate='" + insDate + "', LastConnectDate='" + lastDate + "', DisconnectDate='" + disDate + "  where Email='" + email + "';"
+
+        cursor.execute(query)
+        conn.commit()
+
+@app.route('/university', methods = ['GET', 'POST'])
 def loadUniv():
-    cursor.execute('select * from univ_information')
-    result = []
+    if request.method == 'GET':
+        cursor.execute('select * from univ_information')
+        result = []
 
-    columns = tuple( [d[0] for d in cursor.description] )
+        columns = tuple( [d[0] for d in cursor.description] )
 
-    for row in cursor:
-        result.append(dict(zip(columns, row)))
+        for row in cursor:
+            result.append(dict(zip(columns, row)))
 
-    return json.dumps(result)
+        return json.dumps(result)
 
-@app.route('/registration', methods = ['GET', 'POST'])
-def registration():
-    email = request.form['email']
-    gcmId = request.form['gcmId']
-
-    query = "insert ignore into account (Email, GcmId) values ('" + email + "', '" + gcmId + "');"
-
-    cursor.execute(query)
-    conn.commit()
-
-    return 'ok'
-
-@app.route('/selectUniv', methods = ['POST'])
-def selectUniv():
     if request.method == 'POST':
         toaddr = request.form['email']
         univNumber = request.form['univNumber']
@@ -57,7 +65,7 @@ def selectUniv():
         fromaddr = 'reportcoversender@gmail.com'
 
         gcmId = []
-        query = "select GcmId from account where Email='" + toaddr + "';"
+        query = "select GcmId from gcm_information where Email='" + toaddr + "';"
         cursor.execute(query)
 
         gcmId = str(cursor.fetchone()[0])
@@ -100,9 +108,37 @@ def selectUniv():
         message = {"title":"ReportCover", "message":gcmMsg, "count":34}
         client.send(gcmId, message);
 
+
+        query = "select RefCount from univ_information where UnivNumber='" + univNumber + "';"
+        cursor.execute(query)
+
+        temp = str(cursor.fetchone()[0] + 1)
+
+        print(temp)
+
+        query = "update univ_information set RefCount=" + temp + " where UnivNumber='" + univNumber + "';"
+        print(query)
+        cursor.execute(query)
+        conn.commit()
+
         return 'ok'
 
     return 'error'
+
+@app.route('/gcm', methods = ['POST'])
+def registration():
+    if request.method == 'POST':
+        email = request.form['email']
+        gcmId = request.form['gcmId']
+
+        query = "insert ignore into gcm_information (Email, GcmId) values ('" + email + "', '" + gcmId + "');"
+
+        cursor.execute(query)
+        conn.commit()
+
+        return 'ok'
+    return 'error'
+
 
 @app.route('/image/<fileName>', methods=['GET'])
 def loadImage(fileName):
